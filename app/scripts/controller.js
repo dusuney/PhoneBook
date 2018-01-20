@@ -7,24 +7,20 @@
     PhoneBookCtrl.$inject = ['$scope', '$http'];
 
     function PhoneBookCtrl($scope, $http) {
-        this.contactList = ng.fromJson(localStorage.contacts);
-
-        if (!this.contactList) {
-            this.contactList = [{
-                id: 1,
-                username: 'Максим',
-                workPlace: 'Завод',
-                mobileNumber: 89201101110,
-                email: 'gibrid@mail.ru'
-            },
-            {
-                id: 2,
-                username: 'Генадий',
-                workPlace: 'Магазин',
-                mobileNumber: 89301102110,
-                email: 'test@mail.ru'
-            }];
-        }
+        this.contactList = [{
+            id: 1,
+            username: 'Максим',
+            workPlace: 'Завод',
+            mobileNumber: 89201101110,
+            email: 'gibrid@mail.ru'
+        },
+        {
+            id: 2,
+            username: 'Генадий',
+            workPlace: 'Магазин',
+            mobileNumber: 89301102110,
+            email: 'test@mail.ru'
+        }];
 
         this.currentContact = this.contactList[0];
     }
