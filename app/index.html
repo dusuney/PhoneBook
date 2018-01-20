@@ -40,7 +40,7 @@
             <div class="col-md-5">
                 <ul>
                     <li ng-repeat="contact in ctrl.contactList | filter:query" ng-click="ctrl.viewContact(contact)" ng-click="viewContact(contact)">
-                        {{contact.username}}{{contact.id}}
+                        {{contact.username}}
                         <button type="button" class="btn remove btn-default" aria-label="Left Align" ng-click="ctrl.removeContact(contact)">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
@@ -59,7 +59,7 @@
 
                     <div class="form-group" ng-class="{ 'has-error' : contactForm.workPlace.$invalid && !contactForm.workPlace.$pristine }">
                         <label>Место работы*:</label>
-                        <input type="text" name="workPlace" class="form-control" ng-model="ctrl.currentContact.workPlace" ng-minlength="3" ng-maxlength="8">
+                        <input type="text" name="workPlace" class="form-control" required ng-model="ctrl.currentContact.workPlace" ng-minlength="3" ng-maxlength="8">
                         <p ng-show="contactForm.workPlace.$error.minlength" class="help-block">Название рабочего места слишком короткое</p>
                         <p ng-show="contactForm.workPlace.$error.maxlength" class="help-block">Название рабочего места слишком длинное</p>
                     </div>
