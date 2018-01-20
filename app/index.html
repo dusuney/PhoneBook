@@ -17,6 +17,7 @@
             <p>Телефонный справочник</p>
         </div>
         <div class="row">
+            <!--Поиск -->
             <div class="col-md-5">
                 <div class="form-group search" ng-class="{ 'has-error' : contactForm.username.$invalid && !contactForm.username.$pristine }">
                     <label>Поиск:</label>
@@ -24,6 +25,7 @@
 
                 </div>
             </div>
+            <!--Редактирование/добавление -->
             <div class="col-md-7">
                 <div class="buttons-control">
                     <button ng-click="ctrl.newContact()" type="button" class="btn remove btn-default" aria-label="Left Align">
@@ -52,6 +54,8 @@
             <!--Форма редактирования/создания контакта-->
             <div class="col-md-5" ng-if="ctrl.isEdit">
                 <form name="contactForm" novalidate>
+
+
                     <div class="form-group" ng-class="{ 'has-error' : contactForm.username.$invalid && !contactForm.username.$pristine }">
                         <label>Имя*:</label>
                         <input type="text" name="username" required class="form-control" ng-model="ctrl.currentContact.username" ng-minlength="3"
@@ -82,6 +86,14 @@
                         <p ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" class="help-block">Введите валидную почту</p>
                     </div>
 
+                    <div class="form-group">
+                        <label>Изображение:</label>
+                        <input type="file" onchange="angular.element(this).scope().ctrl.imageChange(this.files)" name="image" required class="form-control">
+                    </div>
+                    <div ng-if="ctrl.currentContact.image">
+                        <img ng-src="{{ctrl.currentContact.image}}" alt=""><br>
+                    </div>
+                    <br> <br>
                     <button ng-if="ctrl.isAdd" ng-click="ctrl.addContact(contactForm)" class="btn btn-primary" ng-disabled="contactForm.$invalid">Добавить</button>
                     <button ng-if="!ctrl.isAdd" ng-click="ctrl.saveContact()" class="btn btn-primary" ng-disabled="contactForm.$invalid">Сохранить</button>
 
@@ -89,9 +101,11 @@
             </div>
             <div class="col-md-5" ng-if="!ctrl.isEdit">
                 <div class="viewContact">
-
+                    <div ng-if="ctrl.currentContact.image">
+                        <img ng-src="{{ctrl.currentContact.image}}" alt=""><br><br>
+                    </div>
                     Имя: {{ctrl.currentContact.username}} <br><br> 
-                    Рабочее место: {{ctrl.currentContact.workPlace}} <br><br> 
+                    Рабочее место: {{ctrl.currentContact.workPlace}} <br><br>                    
                     Мобильный:{{ctrl.currentContact.mobileNumber}} <br> <br> 
                     Почта: {{ctrl.currentContact.email}} <br><br>
                 </div>
