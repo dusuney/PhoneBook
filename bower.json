@@ -16,10 +16,9 @@
   ],
   "dependencies": {
     "normalize.css": "~3.0.3",
-    "angular": "~1.5.8",
+    "angular": "1.6.8",
     "jquery": "~2.1.4",
-    "angular-route":"~1.5.8",
-    "angular-loader":"~1.5.8",
+    "angular-route":"1.6.8",
     "bootstrap":"~3.3.7"
 
   }

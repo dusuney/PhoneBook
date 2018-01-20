@@ -28,10 +28,18 @@ var scripts = [
     'app/scripts/**/components/*.js',
     'app/*.js'
 ];
+
+
 var styles = [
-    'vendor/angular-upload/src/directives/btnUpload.min.css',
-    'vendor/normalize.css/normalize.css',
     'vendor/bootstrap/dist/css/bootstrap.min.css'
+];
+
+var fonts = [
+    'vendor/bootstrap/dist/fonts/*.eot',
+    'vendor/bootstrap/dist/fonts/*.svg',
+    'vendor/bootstrap/dist/fonts/*.ttf',
+    'vendor/bootstrap/dist/fonts/*.woff',
+    'vendor/bootstrap/dist/fonts/*.woff2'
 ];
 
 var stylesLess = ['app/styles/index.less'];
@@ -80,15 +88,21 @@ var lessStream = gulp.src(stylesLess)
     .pipe(concat('less-files.less'));
 
 gulp.task('styles', function () {
-    var mergedStream = merge(lessStream, cssStream)
-        .pipe(concat('app.css'))
-        .pipe(base64({
-            baseDir: './app/styles'
-        }))
-        .pipe(gulp.dest('dist'))
+    gulp.src(stylesLess)
+        .pipe(less())
+        .pipe(gulp.dest('dist/css'))
         .pipe(connect.reload());
+});
 
-    return mergedStream;
+gulp.task('stylesCSS', function () {
+    gulp.src(styles)
+        .pipe(concat('vendor.css'))
+        .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('fonts', function () {
+    gulp.src(fonts)
+        .pipe(gulp.dest('dist/fonts'));
 });
 
 // gulp.task('server', function (next) {
@@ -99,16 +113,16 @@ gulp.task('styles', function () {
 
 // });
 
-gulp.task('connect', function() {
+gulp.task('connect', function () {
     connect.server({
-        root:'dist',
+        root: 'dist',
         livereload: true
     });
 });
 
 
-gulp.task('run', ['images', 'scripts', 'styles', 'connect', 'templates'], function () {
- 
+gulp.task('run', ['fonts','stylesCSS', 'images', 'scripts', 'styles', 'connect', 'templates'], function () {
+
     gulp.watch(images, ['images']).on('change', function (file) {
         livereload.changed(file.path);
     });
@@ -117,7 +131,7 @@ gulp.task('run', ['images', 'scripts', 'styles', 'connect', 'templates'], functi
         livereload.changed(file.path);
     });
 
-    gulp.watch(styles, ['styles']).on('change', function (file) {
+    gulp.watch(stylesLess, ['styles']).on('change', function (file) {
         livereload.changed(file.path);
     });
 

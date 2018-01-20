@@ -1,9 +1,6 @@
 (function(ng) {
-    ng.module('employees', [
-        'ngRoute',
-        'employees.employeeCart',
-        'employees.departmentsList',
-        'employees.employeesList'
+    ng.module('phoneBook', [
+        'ngRoute'
     ]);
 
 })(angular);
