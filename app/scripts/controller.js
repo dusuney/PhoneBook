@@ -29,7 +29,11 @@
         constructor: PhoneBookCtrl,
         addContact: function (form) {
             var lastElement = this.contactList[this.contactList.length - 1];
-            this.currentContact.id = lastElement.id + 1;
+            if (lastElement) {
+                this.currentContact.id = lastElement.id + 1;
+            } else {
+                this.currentContact.id = 1;
+            }
             this.contactList.push(this.currentContact);
             this.isEdit = false;
             this.isAdd = false;
